@@ -3,16 +3,16 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 5
+      interval: "weekly"
+    open-pull-requests-limit: 0
     labels:
       - "dependencies"
       - "dependabot"
   - package-ecosystem: "npm"
     directory: "/sample_subject"
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 3
+      interval: "weekly"
+    open-pull-requests-limit: 0
     labels:
       - "dependencies"
       - "sample-subject"
