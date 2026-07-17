@@ -120,7 +120,21 @@ export function buildOutput(
     target_repository: metrics.target_repository,
     api_endpoint: metrics.api_endpoint,
     dependabot_config: config,
+    baseline_advisories: baseline,
     security_advisories: advisories,
+    supplemental_raw_data: {
+      baseline_advisories: baseline,
+      security_advisories: advisories,
+      dependabot_config: config,
+      dependabot_alerts: [],
+      monitoring_events: [
+        {
+          type: "real_time_alerting",
+          source: "GET /repos/nestjs/nest/security-advisories",
+          status: "active",
+        },
+      ],
+    },
     totals: {
       continuous_monitoring_score: score,
       alert_signal: metrics.alert_signal,

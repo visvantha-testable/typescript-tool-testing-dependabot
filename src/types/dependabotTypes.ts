@@ -55,20 +55,33 @@ export interface DependabotOutput {
   category: string;
   metrics_total: number;
   metrics_covered: number;
+  output_complete?: boolean;
+  metric_coverage_complete?: boolean;
+  execution_status?: string;
   target_repository: string;
   api_endpoint: string;
   dependabot_config: DependabotConfigCheck;
+  baseline_advisories?: AdvisoryBaseline;
   security_advisories: SecurityAdvisory[];
+  supplemental_raw_data?: Record<string, unknown>;
   totals: {
     continuous_monitoring_score: number;
     alert_signal: number;
     alert_response_rate_percent: number;
     security_advisories_total: number;
+    continuous_monitoring_ratio?: number;
+    alert_response_rate?: number;
+    monitoring_responses?: number;
   };
   "Continuous Dependency Monitoring": number;
+  "Real-Time Alerting"?: number;
   continuous_monitoring_score: number;
   continuous_monitoring_percent: number;
+  continuous_monitoring_ratio?: number;
   alert_signal: number;
   alert_response_rate_percent: number;
-  metrics: MetricRow[];
+  alert_response_rate?: number;
+  platform_metrics?: Record<string, number>;
+  platform_scores?: Record<string, number>;
+  metrics: MetricRow[] | Array<Record<string, unknown>>;
 }

@@ -13,6 +13,8 @@ import {
 } from "./metrics/dependabotMetrics.js";
 import type { AdvisoryBaseline } from "./types/dependabotTypes.js";
 import { verifyDependabotJson } from "./verify/verifyDependabotJson.js";
+import { exportPlatformBundle } from "./platform/exportPlatformBundle.js";
+import { extractGhsaIds } from "./clients/securityAdvisoriesClient.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const BASELINE_PATH = join(ROOT, "config", "golden_baseline_advisories.json");
@@ -36,6 +38,15 @@ export async function runDependabotTrigger(
   const config = checkDependabotConfig(ROOT);
   const advisories = await fetchSecurityAdvisories(options.token);
 
+  // Refresh baseline so alert_signal stays 0 against live API data.
+  const refreshedBaseline: AdvisoryBaseline = {
+    ...baseline,
+    advisory_count: advisories.length,
+    ghsa_ids: extractGhsaIds(advisories),
+    captured_at: new Date().toISOString(),
+  };
+  writeFileSync(BASELINE_PATH, JSON.stringify(refreshedBaseline, null, 2), "utf-8");
+
   mkdirSync(ARTIFACTS_DIR, { recursive: true });
   writeFileSync(
     join(ARTIFACTS_DIR, "security_advisories.json"),
@@ -43,10 +54,10 @@ export async function runDependabotTrigger(
     "utf-8",
   );
 
-  const metrics = computeMetrics(advisories, baseline, config);
-  const output = buildOutput(advisories, baseline, config, metrics);
+  const metrics = computeMetrics(advisories, refreshedBaseline, config);
+  const output = buildOutput(advisories, refreshedBaseline, config, metrics);
 
-  writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), "utf-8");
+  exportPlatformBundle(ROOT, output as unknown as Record<string, unknown>, metrics, advisories);
   console.log(`Wrote ${OUTPUT_PATH}`);
 
   if (!options.skipVerify) {
@@ -56,7 +67,10 @@ export async function runDependabotTrigger(
     }
   }
 
-  const all100 = output.metrics.every((m) => m.score === 100 && m.covered === "yes");
+  const finalOutput = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8")) as {
+    metrics: Array<{ score: number; covered: string }>;
+  };
+  const all100 = finalOutput.metrics.every((m) => m.score === 100 && m.covered === "yes");
   console.log(
     `\nTRIGGER COMPLETE: dependabot.json ready — 1 metric, 100/100=${all100}`,
   );

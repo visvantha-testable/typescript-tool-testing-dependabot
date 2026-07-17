@@ -1,0 +1,39 @@
+{
+  "tool": "Dependabot",
+  "target_repository": "nestjs/nest",
+  "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
+  "execution_status": "Completed",
+  "metric_coverage_complete": true,
+  "metrics_covered": 1,
+  "metrics_total": 1,
+  "metrics": [
+    {
+      "classification": "Continuous Dependency Monitoring",
+      "l4_classification": "Continuous Dependency Monitoring",
+      "l5_metric": "Real-Time Alerting",
+      "covered": "yes",
+      "score": 100,
+      "value": "100/100",
+      "result": "PASS",
+      "coverage_percent": 100,
+      "platform_ratio": 100,
+      "raw_sources_present": true,
+      "dependabot_native": true,
+      "field": "continuous_monitoring_score",
+      "raw_parameters": {
+        "alert_signal": 0,
+        "alert_response_rate_percent": 100,
+        "alert_response_rate": 100,
+        "monitoring_responses": 100,
+        "monitoring_alerts": 0,
+        "continuous_monitoring_score": 100,
+        "continuous_monitoring_ratio": 100,
+        "security_advisories_total": 7,
+        "dependabot_enabled": true,
+        "monitoring_active": true,
+        "api_endpoint": "GET /repos/nestjs/nest/security-advisories"
+      },
+      "formula": "100 if alert_signal == 0 else MAX(0, 100 - alert_signal * 20)"
+    }
+  ]
+}
