@@ -1,0 +1,27 @@
+{
+  "tool": "Dependabot",
+  "strategy": "Security White-box Testing",
+  "category": "Dependency Risk (SCA)",
+  "metrics_total": 1,
+  "target_repository": {
+    "name": "nestjs/nest",
+    "url": "https://github.com/nestjs/nest",
+    "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
+    "rationale": "Canonical TypeScript/NestJS repository with published GitHub Security Advisories; Dependabot monitors npm ecosystem against this advisory feed"
+  },
+  "local_subject": {
+    "path": "sample_subject",
+    "ecosystem": "npm",
+    "language": "TypeScript"
+  },
+  "metrics": [
+    {
+      "id": 6,
+      "l4_classification": "Continuous Dependency Monitoring",
+      "l5_metric": "Real-Time Alerting",
+      "field": "continuous_monitoring_score",
+      "formula": "100 if dependabot_enabled and alert_signal == 0 else MAX(0, 100 - alert_signal * 20)",
+      "expected_score": 100
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "platform": "Testable",
+  "tool": "Dependabot",
+  "trigger_command": "npm run trigger",
+  "trigger_command_alt": "npx tsx src/dependabotTrigger.ts",
+  "do_not_run_raw_dependabot_alone": true,
+  "primary_output_file": "dependabot.json",
+  "api_execution": {
+    "method": "GET",
+    "endpoint": "/repos/nestjs/nest/security-advisories",
+    "target_repository": "https://github.com/nestjs/nest"
+  },
+  "required_root_fields": [
+    "status",
+    "tool",
+    "Continuous Dependency Monitoring",
+    "continuous_monitoring_score",
+    "continuous_monitoring_percent",
+    "alert_signal",
+    "alert_response_rate_percent",
+    "totals",
+    "metrics",
+    "dependabot_config",
+    "security_advisories"
+  ],
+  "expected_scores": {
+    "Continuous Dependency Monitoring": 100
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "metric": "Continuous Dependency Monitoring",
+  "l5_metric": "Real-Time Alerting",
+  "strategy": "Security White-box Testing",
+  "category": "Dependency Risk (SCA)",
+  "tool": "Dependabot",
+  "target_repository": {
+    "name": "nestjs/nest",
+    "url": "https://github.com/nestjs/nest",
+    "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
+    "why": "GitHub Security Advisories API provides the real-time vulnerability feed that Dependabot uses for npm/TypeScript continuous monitoring"
+  },
+  "local_subject": {
+    "path": "sample_subject",
+    "package_manager": "npm",
+    "language": "TypeScript"
+  },
+  "trigger_sequence": [
+    {
+      "step": 1,
+      "tool": "npm",
+      "command": "npm install",
+      "purpose": "Install TypeScript platform dependencies"
+    },
+    {
+      "step": 2,
+      "tool": "Dependabot",
+      "command": "Verify .github/dependabot.yml monitors npm (/ and /sample_subject)",
+      "purpose": "Confirm Dependabot continuous monitoring is configured"
+    },
+    {
+      "step": 3,
+      "tool": "GitHub Security Advisories API",
+      "command": "GET /repos/nestjs/nest/security-advisories",
+      "purpose": "Fetch real-time security advisory feed (execution witness)"
+    },
+    {
+      "step": 4,
+      "tool": "Dependabot platform",
+      "command": "npm run trigger",
+      "purpose": "Compute Continuous Dependency Monitoring score and write dependabot.json"
+    },
+    {
+      "step": 5,
+      "tool": "verify",
+      "command": "npm run verify",
+      "purpose": "Assert Continuous Dependency Monitoring = 100/100"
+    }
+  ],
+  "one_shot_script": "npm run trigger",
+  "platform_trigger": "npm run trigger",
+  "primary_output_file": "dependabot.json",
+  "expected_output_fields": [
+    "continuous_monitoring_score",
+    "continuous_monitoring_percent",
+    "alert_signal",
+    "alert_response_rate_percent",
+    "Continuous Dependency Monitoring"
+  ],
+  "expected_sample_output": {
+    "status": "READY",
+    "continuous_monitoring_score": 100,
+    "continuous_monitoring_percent": 100,
+    "alert_signal": 0,
+    "alert_response_rate_percent": 100,
+    "Continuous Dependency Monitoring": 100,
+    "security_advisories_total": 7
+  }
+}

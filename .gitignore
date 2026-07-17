@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.DS_Store
+artifacts/
+reports/
+sample_subject/node_modules/
+sample_subject/dist/
