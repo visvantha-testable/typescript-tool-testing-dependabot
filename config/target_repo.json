@@ -2,22 +2,31 @@
   "strategy": "Security White-box Testing",
   "category": "Dependency Risk (SCA)",
   "tool": "Dependabot",
-  "recommended_repository": {
-    "name": "nestjs/nest",
-    "url": "https://github.com/nestjs/nest",
-    "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
-    "rationale": "TypeScript/NestJS repository with published GitHub Security Advisories; Dependabot uses this feed for continuous npm dependency monitoring and real-time alerting"
+  "training_repository": {
+    "owner": "visvantha-testable",
+    "name": "typescript-tool-testing-dependabot",
+    "full_name": "visvantha-testable/typescript-tool-testing-dependabot",
+    "url": "https://github.com/visvantha-testable/typescript-tool-testing-dependabot",
+    "dependabot_alerts_api": "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts",
+    "rationale": "Training repo with intentionally vulnerable npm dependencies; GitHub Dependabot generates real security alerts for Continuous Dependency Monitoring validation"
   },
   "local_subject": {
     "path": "sample_subject",
     "language": "TypeScript",
     "package_manager": "npm"
   },
+  "intentionally_vulnerable_packages": [
+    { "name": "lodash", "version": "4.17.20", "ghsa": "GHSA-29mw-WPGm-hmr9" },
+    { "name": "minimist", "version": "1.2.5", "ghsa": "GHSA-xvch-057g-87c4" },
+    { "name": "axios", "version": "0.21.1", "ghsa": "GHSA-cph5-m8f7-6c5x" },
+    { "name": "ws", "version": "5.2.3", "manifest": "sample_subject/package.json", "ghsa": "GHSA-6fc8-6g84-gg3v" }
+  ],
   "metrics": [
     {
       "l4_classification": "Continuous Dependency Monitoring",
       "l5_metric": "Real-Time Alerting",
-      "formula": "100 if dependabot_enabled and alert_signal == 0 else MAX(0, 100 - alert_signal * 20)"
+      "api_witness": "GET /repos/{owner}/{repo}/dependabot/alerts",
+      "fully_supported_requires": "HTTP 200 and at least one open Dependabot alert"
     }
   ]
 }

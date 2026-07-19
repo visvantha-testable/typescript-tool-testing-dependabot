@@ -5,16 +5,19 @@ import type { DependabotMetrics } from "../src/types/dependabotTypes.js";
 const metrics: DependabotMetrics = {
   dependabot_enabled: true,
   monitoring_active: true,
-  security_advisories_total: 7,
-  alert_signal: 0,
+  dependabot_alerts_total: 3,
+  open_alerts_count: 3,
+  alert_signal: 3,
   alert_response_rate_percent: 100,
-  new_advisories_count: 0,
-  baseline_advisory_count: 7,
+  new_alerts_count: 3,
+  baseline_alert_count: 0,
   continuous_monitoring_score: 100,
   continuous_monitoring_percent: 100,
   api_status: "OK",
-  target_repository: "nestjs/nest",
-  api_endpoint: "GET /repos/nestjs/nest/security-advisories",
+  target_repository: "visvantha-testable/typescript-tool-testing-dependabot",
+  api_endpoint:
+    "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts",
+  metric_fully_supported: true,
 };
 
 const npm = {

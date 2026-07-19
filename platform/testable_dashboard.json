@@ -1,7 +1,7 @@
 {
   "tool": "Dependabot",
-  "target_repository": "nestjs/nest",
-  "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
+  "target_repository": "visvantha-testable/typescript-tool-testing-dependabot",
+  "api_endpoint": "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts",
   "execution_status": "Completed",
   "metric_coverage_complete": true,
   "metrics_covered": 8,
@@ -20,7 +20,7 @@
       "raw_sources_present": true,
       "dependabot_native": false,
       "raw_parameters": {
-        "transitive_dependencies": 93,
+        "transitive_dependencies": 94,
         "transitive_vulnerable_count": 0,
         "hidden_relationship_risk": 0,
         "transitive_dependency_score": 100
@@ -42,8 +42,8 @@
       "raw_parameters": {
         "copyleft_license_count": 0,
         "restricted_license_count": 0,
-        "compliant_licenses": 9700,
-        "total_licenses": 97,
+        "compliant_licenses": 10300,
+        "total_licenses": 103,
         "license_compliance_ratio": 100,
         "license_compliance_score": 100
       },
@@ -63,8 +63,8 @@
       "dependabot_native": false,
       "raw_parameters": {
         "total_vulnerabilities": 0,
-        "trusted_dependencies": 9700,
-        "total_dependencies": 97,
+        "trusted_dependencies": 9800,
+        "total_dependencies": 103,
         "supply_chain_security_ratio": 100,
         "supply_chain_score": 100
       },
@@ -83,8 +83,8 @@
       "raw_sources_present": true,
       "dependabot_native": false,
       "raw_parameters": {
-        "total_dependencies": 97,
-        "healthy_dependencies": 9700,
+        "total_dependencies": 103,
+        "healthy_dependencies": 9800,
         "community_vitality_ratio": 100,
         "dependency_health_score": 100
       },
@@ -123,13 +123,16 @@
       "raw_sources_present": true,
       "dependabot_native": true,
       "raw_parameters": {
-        "alert_signal": 0,
+        "alert_signal": 5,
+        "dependabot_alerts_total": 5,
         "alert_response_rate_percent": 100,
         "monitoring_responses": 100,
         "alert_response_rate": 100,
-        "continuous_monitoring_score": 100
+        "continuous_monitoring_score": 100,
+        "metric_fully_supported": true,
+        "api_endpoint": "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts"
       },
-      "formula": "100 if alert_signal == 0 else MAX(0, 100 - alert_signal * 20)"
+      "formula": "100 when Dependabot Alerts API returns HTTP 200 with open alerts"
     },
     {
       "classification": "Vulnerability Dependency Detection",
@@ -144,12 +147,13 @@
       "raw_sources_present": true,
       "dependabot_native": true,
       "raw_parameters": {
-        "known_cve_count": 0,
+        "known_cve_count": 5,
         "critical_cve_count": 0,
-        "high_cve_count": 0,
-        "vulnerability_detection_score": 100
+        "high_cve_count": 5,
+        "vulnerability_detection_score": 100,
+        "dependabot_alerts_total": 5
       },
-      "formula": "MAX(0, 100 - CVE penalties)"
+      "formula": "Derived from Dependabot alert count"
     },
     {
       "classification": "Outdated Dependency Detection",

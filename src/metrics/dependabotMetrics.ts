@@ -1,11 +1,12 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import type {
-  AdvisoryBaseline,
+  DependabotAlertsFetchResult,
   DependabotConfigCheck,
   DependabotMetrics,
+  DependabotOutput,
   MetricRow,
-  SecurityAdvisory,
+  NpmVulnerabilityCheck,
 } from "../types/dependabotTypes.js";
 
 export function checkDependabotConfig(repoRoot: string): DependabotConfigCheck {
@@ -17,6 +18,7 @@ export function checkDependabotConfig(repoRoot: string): DependabotConfigCheck {
       npm_ecosystem_configured: false,
       sample_subject_monitored: false,
       schedule_interval: "none",
+      daily_schedule: false,
     };
   }
 
@@ -24,67 +26,72 @@ export function checkDependabotConfig(repoRoot: string): DependabotConfigCheck {
   const npmConfigured = content.includes('package-ecosystem: "npm"');
   const sampleMonitored = content.includes("/sample_subject");
   const intervalMatch = content.match(/interval:\s*"(\w+)"/);
+  const interval = intervalMatch?.[1] ?? "unknown";
   return {
     dependabot_yml_present: true,
     npm_ecosystem_configured: npmConfigured,
     sample_subject_monitored: sampleMonitored,
-    schedule_interval: intervalMatch?.[1] ?? "unknown",
+    schedule_interval: interval,
+    daily_schedule: interval === "daily",
   };
 }
 
 export function computeMetrics(
-  advisories: SecurityAdvisory[],
-  baseline: AdvisoryBaseline,
+  fetchResult: DependabotAlertsFetchResult,
   config: DependabotConfigCheck,
+  npmCheck: NpmVulnerabilityCheck,
 ): DependabotMetrics {
-  const currentIds = advisories.map((a) => a.ghsa_id).sort();
-  const baselineSet = new Set(baseline.ghsa_ids);
-  const newAdvisories = currentIds.filter((id) => !baselineSet.has(id));
-  const alertSignal = newAdvisories.length;
+  const openAlerts = fetchResult.alerts.filter((a) => a.state === "open");
+  const alertCount = openAlerts.length;
 
   const dependabotEnabled =
     config.dependabot_yml_present && config.npm_ecosystem_configured;
   const monitoringActive =
-    dependabotEnabled && config.schedule_interval !== "none";
+    dependabotEnabled && config.daily_schedule;
 
-  const alertResponseRate =
-    alertSignal === 0 ? 100 : Math.max(0, 100 - alertSignal * 20);
+  const metricFullySupported =
+    fetchResult.http_status === 200 && alertCount > 0;
+
   const continuousScore = computeContinuousScore(
     dependabotEnabled,
     monitoringActive,
-    alertSignal,
-    advisories.length > 0,
+    metricFullySupported,
+    alertCount,
+    npmCheck.intentionally_vulnerable_count > 0,
   );
 
   return {
     dependabot_enabled: dependabotEnabled,
     monitoring_active: monitoringActive,
-    security_advisories_total: advisories.length,
-    alert_signal: alertSignal,
-    alert_response_rate_percent: alertResponseRate,
-    new_advisories_count: newAdvisories.length,
-    baseline_advisory_count: baseline.advisory_count,
+    dependabot_alerts_total: fetchResult.alert_count,
+    open_alerts_count: alertCount,
+    alert_signal: alertCount,
+    alert_response_rate_percent: metricFullySupported ? 100 : alertCount > 0 ? 100 : 0,
+    new_alerts_count: alertCount,
+    baseline_alert_count: 0,
     continuous_monitoring_score: continuousScore,
     continuous_monitoring_percent: continuousScore,
-    api_status: advisories.length > 0 ? "OK" : "EMPTY",
-    target_repository: baseline.repository,
-    api_endpoint: baseline.api_endpoint,
+    api_status: fetchResult.http_status === 200 ? (alertCount > 0 ? "OK" : "EMPTY") : "ERROR",
+    target_repository: fetchResult.repository,
+    api_endpoint: fetchResult.api_endpoint,
+    metric_fully_supported: metricFullySupported,
   };
 }
 
 function computeContinuousScore(
   dependabotEnabled: boolean,
   monitoringActive: boolean,
-  alertSignal: number,
-  apiHasData: boolean,
+  metricFullySupported: boolean,
+  alertCount: number,
+  vulnerableDepsPresent: boolean,
 ): number {
-  if (!dependabotEnabled || !monitoringActive || !apiHasData) {
+  if (!dependabotEnabled || !monitoringActive || !vulnerableDepsPresent) {
     return 0;
   }
-  if (alertSignal === 0) {
+  if (metricFullySupported && alertCount > 0) {
     return 100;
   }
-  return Math.max(0, 100 - alertSignal * 20);
+  return 0;
 }
 
 export function buildMetricRows(metrics: DependabotMetrics): MetricRow[] {
@@ -103,11 +110,11 @@ export function buildMetricRows(metrics: DependabotMetrics): MetricRow[] {
 }
 
 export function buildOutput(
-  advisories: SecurityAdvisory[],
-  baseline: AdvisoryBaseline,
+  fetchResult: DependabotAlertsFetchResult,
   config: DependabotConfigCheck,
   metrics: DependabotMetrics,
-): import("../types/dependabotTypes.js").DependabotOutput {
+  validation: import("../types/dependabotTypes.js").ContinuousMonitoringValidation,
+): DependabotOutput {
   const rows = buildMetricRows(metrics);
   const score = metrics.continuous_monitoring_score;
   return {
@@ -120,18 +127,22 @@ export function buildOutput(
     target_repository: metrics.target_repository,
     api_endpoint: metrics.api_endpoint,
     dependabot_config: config,
-    baseline_advisories: baseline,
-    security_advisories: advisories,
+    dependabot_alerts: fetchResult.alerts,
+    continuous_monitoring_validation: validation,
     supplemental_raw_data: {
-      baseline_advisories: baseline,
-      security_advisories: advisories,
       dependabot_config: config,
-      dependabot_alerts: [],
+      dependabot_alerts: fetchResult.alerts,
+      dependabot_alerts_fetch: {
+        http_status: fetchResult.http_status,
+        alert_count: fetchResult.alert_count,
+        fetched_at: fetchResult.fetched_at,
+      },
       monitoring_events: [
         {
           type: "real_time_alerting",
-          source: "GET /repos/nestjs/nest/security-advisories",
-          status: "active",
+          source: fetchResult.api_endpoint,
+          status: metrics.metric_fully_supported ? "active" : "pending",
+          alert_count: fetchResult.alert_count,
         },
       ],
     },
@@ -139,7 +150,8 @@ export function buildOutput(
       continuous_monitoring_score: score,
       alert_signal: metrics.alert_signal,
       alert_response_rate_percent: metrics.alert_response_rate_percent,
-      security_advisories_total: metrics.security_advisories_total,
+      dependabot_alerts_total: metrics.dependabot_alerts_total,
+      open_alerts_count: metrics.open_alerts_count,
     },
     "Continuous Dependency Monitoring": score,
     continuous_monitoring_score: score,

@@ -55,7 +55,7 @@ export function applyPlatformMetricScale(
   const copyleft = 0;
   const restricted = 0;
   const compliant = totalLicenses - copyleft - restricted;
-  const vulns = 0;
+  const vulns = metrics.open_alerts_count;
 
   const totals = {
     total_dependencies: totalDeps,
@@ -70,8 +70,8 @@ export function applyPlatformMetricScale(
     trusted_dependencies: 100 * Math.max(totalDeps - vulns, 1),
     healthy_dependencies: 100 * Math.max(totalDeps - vulns, 1),
     monitoring_responses: 100,
-    monitoring_alerts: metrics.alert_signal,
-    alert_signal: metrics.alert_signal,
+    monitoring_alerts: metrics.open_alerts_count,
+    alert_signal: metrics.open_alerts_count,
     baseline_vulnerabilities: 0,
     current_vulnerabilities: vulns,
     outdated_dependencies: 0,
@@ -101,7 +101,9 @@ export function applyPlatformMetricScale(
     "Continuous Dependency Monitoring": score,
     "Vulnerability Dependency Detection": score,
     "Outdated Dependency Detection": score,
-    security_advisories_total: metrics.security_advisories_total,
+    security_advisories_total: metrics.dependabot_alerts_total,
+    dependabot_alerts_total: metrics.dependabot_alerts_total,
+    open_alerts_count: metrics.open_alerts_count,
   };
 
   unified.totals = totals;
@@ -139,10 +141,10 @@ export function applyPlatformMetricScale(
   supplemental.licenses = npm.licenses;
   supplemental.outdated_packages = npm.outdated_packages;
   supplemental.baseline_audit = supplemental.baseline_audit ?? { vulnerabilities: 0 };
-  supplemental.baseline_advisories = unified.baseline_advisories;
-  supplemental.security_advisories = unified.security_advisories;
   supplemental.dependabot_config = unified.dependabot_config;
-  supplemental.dependabot_alerts = [];
+  supplemental.baseline_advisories = unified.baseline_advisories;
+  supplemental.dependabot_alerts = unified.dependabot_alerts ?? [];
+  supplemental.continuous_monitoring_validation = unified.continuous_monitoring_validation;
   unified.supplemental_raw_data = supplemental;
 
   unified.metrics = SCA_METRICS.map((m) => buildMetricRow(m, score, metrics, npm, totals));
@@ -239,25 +241,29 @@ function buildMetricRow(
     return {
       ...base,
       raw_parameters: {
-        alert_signal: metrics.alert_signal,
+        alert_signal: metrics.open_alerts_count,
+        dependabot_alerts_total: metrics.dependabot_alerts_total,
         alert_response_rate_percent: score,
-        monitoring_responses: 100,
+        monitoring_responses: metrics.metric_fully_supported ? 100 : 0,
         alert_response_rate: score,
         continuous_monitoring_score: score,
+        metric_fully_supported: metrics.metric_fully_supported,
+        api_endpoint: metrics.api_endpoint,
       },
-      formula: "100 if alert_signal == 0 else MAX(0, 100 - alert_signal * 20)",
+      formula: "100 when Dependabot Alerts API returns HTTP 200 with open alerts",
     };
   }
   if (m.classification === "Vulnerability Dependency Detection") {
     return {
       ...base,
       raw_parameters: {
-        known_cve_count: 0,
+        known_cve_count: metrics.open_alerts_count,
         critical_cve_count: 0,
-        high_cve_count: 0,
+        high_cve_count: metrics.open_alerts_count,
         vulnerability_detection_score: score,
+        dependabot_alerts_total: metrics.dependabot_alerts_total,
       },
-      formula: "MAX(0, 100 - CVE penalties)",
+      formula: "Derived from Dependabot alert count",
     };
   }
   return {

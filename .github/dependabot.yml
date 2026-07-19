@@ -5,14 +5,20 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "all"
     labels:
       - "dependencies"
       - "dependabot"
+      - "security"
   - package-ecosystem: "npm"
     directory: "/sample_subject"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 3
+    allow:
+      - dependency-type: "all"
     labels:
       - "dependencies"
       - "sample-subject"
+      - "security"

@@ -1,0 +1,6 @@
+Alert ID,Dependency Name,Package Ecosystem,Severity,CVE,GHSA,Vulnerable Version,First Patched Version,Manifest Path,Alert State,Created Date,Updated Date,Fixed Version,Advisory Summary
+5,vite,npm,medium,CVE-2026-53632,GHSA-v6wh-96g9-6wx3,<= 6.4.2,6.4.3,package-lock.json,open,2026-07-19T18:32:30Z,2026-07-19T18:32:30Z,,launch-editor: NTLMv2 hash disclosure via UNC path handling on Windows
+4,vite,npm,high,CVE-2026-53571,GHSA-fx2h-pf6j-xcff,<= 6.4.2,6.4.3,package-lock.json,open,2026-07-19T18:32:29Z,2026-07-19T18:32:29Z,,vite: `server.fs.deny` bypass on Windows alternate paths
+3,vitest,npm,critical,CVE-2026-47429,GHSA-5xrq-8626-4rwp,< 3.2.6,3.2.6,package-lock.json,open,2026-07-19T18:32:29Z,2026-07-19T18:32:29Z,,"When Vitest UI server is listening, arbitrary file can be read and executed"
+2,vite,npm,medium,CVE-2026-39365,GHSA-4w7w-66w2-5vf9,<= 6.4.1,6.4.2,package-lock.json,open,2026-07-19T18:32:29Z,2026-07-19T18:32:29Z,,Vite Vulnerable to Path Traversal in Optimized Deps `.map` Handling
+1,esbuild,npm,medium,,GHSA-67mh-4wv8-2f99,<= 0.24.2,0.25.0,package-lock.json,open,2026-07-19T18:32:29Z,2026-07-19T18:32:29Z,,esbuild enables any website to send any requests to the development server and read the response

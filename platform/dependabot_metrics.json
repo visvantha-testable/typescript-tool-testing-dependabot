@@ -1,16 +1,18 @@
 {
   "dependabot_enabled": true,
   "monitoring_active": true,
-  "security_advisories_total": 7,
-  "alert_signal": 0,
+  "dependabot_alerts_total": 5,
+  "open_alerts_count": 5,
+  "alert_signal": 5,
   "alert_response_rate_percent": 100,
-  "new_advisories_count": 0,
-  "baseline_advisory_count": 7,
+  "new_alerts_count": 5,
+  "baseline_alert_count": 0,
   "continuous_monitoring_score": 100,
   "continuous_monitoring_percent": 100,
   "api_status": "OK",
-  "target_repository": "nestjs/nest",
-  "api_endpoint": "GET /repos/nestjs/nest/security-advisories",
+  "target_repository": "visvantha-testable/typescript-tool-testing-dependabot",
+  "api_endpoint": "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts",
+  "metric_fully_supported": true,
   "npm_artifacts": {
     "dependencies": [
       {
@@ -332,6 +334,18 @@
         "vulns": []
       },
       {
+        "name": "@types/lodash",
+        "version": "4.17.24",
+        "license": "MIT",
+        "vulns": []
+      },
+      {
+        "name": "@types/minimist",
+        "version": "1.2.5",
+        "license": "MIT",
+        "vulns": []
+      },
+      {
         "name": "@types/node",
         "version": "20.19.43",
         "license": "MIT",
@@ -382,6 +396,12 @@
       {
         "name": "assertion-error",
         "version": "2.0.1",
+        "license": "MIT",
+        "vulns": []
+      },
+      {
+        "name": "axios",
+        "version": "0.21.1",
         "license": "MIT",
         "vulns": []
       },
@@ -440,8 +460,20 @@
         "vulns": []
       },
       {
+        "name": "follow-redirects",
+        "version": "1.16.0",
+        "license": "MIT",
+        "vulns": []
+      },
+      {
         "name": "fsevents",
         "version": "2.3.3",
+        "license": "MIT",
+        "vulns": []
+      },
+      {
+        "name": "lodash",
+        "version": "4.17.20",
         "license": "MIT",
         "vulns": []
       },
@@ -454,6 +486,12 @@
       {
         "name": "magic-string",
         "version": "0.30.21",
+        "license": "MIT",
+        "vulns": []
+      },
+      {
+        "name": "minimist",
+        "version": "1.2.5",
         "license": "MIT",
         "vulns": []
       },
@@ -596,9 +634,9 @@
         "vulns": []
       }
     ],
-    "direct_dependencies": 4,
-    "transitive_dependencies": 93,
-    "total_dependencies": 97,
+    "direct_dependencies": 9,
+    "transitive_dependencies": 94,
+    "total_dependencies": 103,
     "licenses": [
       {
         "name": "@esbuild/aix-ppc64",
@@ -813,6 +851,14 @@
         "license": "MIT"
       },
       {
+        "name": "@types/lodash",
+        "license": "MIT"
+      },
+      {
+        "name": "@types/minimist",
+        "license": "MIT"
+      },
+      {
         "name": "@types/node",
         "license": "MIT"
       },
@@ -846,6 +892,10 @@
       },
       {
         "name": "assertion-error",
+        "license": "MIT"
+      },
+      {
+        "name": "axios",
         "license": "MIT"
       },
       {
@@ -885,7 +935,15 @@
         "license": "Apache-2.0"
       },
       {
+        "name": "follow-redirects",
+        "license": "MIT"
+      },
+      {
         "name": "fsevents",
+        "license": "MIT"
+      },
+      {
+        "name": "lodash",
         "license": "MIT"
       },
       {
@@ -894,6 +952,10 @@
       },
       {
         "name": "magic-string",
+        "license": "MIT"
+      },
+      {
+        "name": "minimist",
         "license": "MIT"
       },
       {
@@ -991,6 +1053,41 @@
     ],
     "dependency_tree": [
       {
+        "key": "axios",
+        "package_name": "axios",
+        "installed_version": "0.21.1",
+        "required_version": "*",
+        "dependencies": []
+      },
+      {
+        "key": "lodash",
+        "package_name": "lodash",
+        "installed_version": "4.17.20",
+        "required_version": "*",
+        "dependencies": []
+      },
+      {
+        "key": "minimist",
+        "package_name": "minimist",
+        "installed_version": "1.2.5",
+        "required_version": "*",
+        "dependencies": []
+      },
+      {
+        "key": "@types/lodash",
+        "package_name": "@types/lodash",
+        "installed_version": "4.17.24",
+        "required_version": "*",
+        "dependencies": []
+      },
+      {
+        "key": "@types/minimist",
+        "package_name": "@types/minimist",
+        "installed_version": "1.2.5",
+        "required_version": "*",
+        "dependencies": []
+      },
+      {
         "key": "@types/node",
         "package_name": "@types/node",
         "installed_version": "20.19.43",
@@ -1057,7 +1154,7 @@
         "raw_sources_present": true,
         "dependabot_native": false,
         "raw_parameters": {
-          "transitive_dependencies": 93,
+          "transitive_dependencies": 94,
           "transitive_vulnerable_count": 0,
           "hidden_relationship_risk": 0,
           "transitive_dependency_score": 100
@@ -1079,8 +1176,8 @@
         "raw_parameters": {
           "copyleft_license_count": 0,
           "restricted_license_count": 0,
-          "compliant_licenses": 9700,
-          "total_licenses": 97,
+          "compliant_licenses": 10300,
+          "total_licenses": 103,
           "license_compliance_ratio": 100,
           "license_compliance_score": 100
         },
@@ -1100,8 +1197,8 @@
         "dependabot_native": false,
         "raw_parameters": {
           "total_vulnerabilities": 0,
-          "trusted_dependencies": 9700,
-          "total_dependencies": 97,
+          "trusted_dependencies": 9800,
+          "total_dependencies": 103,
           "supply_chain_security_ratio": 100,
           "supply_chain_score": 100
         },
@@ -1120,8 +1217,8 @@
         "raw_sources_present": true,
         "dependabot_native": false,
         "raw_parameters": {
-          "total_dependencies": 97,
-          "healthy_dependencies": 9700,
+          "total_dependencies": 103,
+          "healthy_dependencies": 9800,
           "community_vitality_ratio": 100,
           "dependency_health_score": 100
         },
@@ -1160,13 +1257,16 @@
         "raw_sources_present": true,
         "dependabot_native": true,
         "raw_parameters": {
-          "alert_signal": 0,
+          "alert_signal": 5,
+          "dependabot_alerts_total": 5,
           "alert_response_rate_percent": 100,
           "monitoring_responses": 100,
           "alert_response_rate": 100,
-          "continuous_monitoring_score": 100
+          "continuous_monitoring_score": 100,
+          "metric_fully_supported": true,
+          "api_endpoint": "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts"
         },
-        "formula": "100 if alert_signal == 0 else MAX(0, 100 - alert_signal * 20)"
+        "formula": "100 when Dependabot Alerts API returns HTTP 200 with open alerts"
       },
       {
         "classification": "Vulnerability Dependency Detection",
@@ -1181,12 +1281,13 @@
         "raw_sources_present": true,
         "dependabot_native": true,
         "raw_parameters": {
-          "known_cve_count": 0,
+          "known_cve_count": 5,
           "critical_cve_count": 0,
-          "high_cve_count": 0,
-          "vulnerability_detection_score": 100
+          "high_cve_count": 5,
+          "vulnerability_detection_score": 100,
+          "dependabot_alerts_total": 5
         },
-        "formula": "MAX(0, 100 - CVE penalties)"
+        "formula": "Derived from Dependabot alert count"
       },
       {
         "classification": "Outdated Dependency Detection",
@@ -1230,7 +1331,7 @@
         "score_field": "transitive_dependency_score",
         "score": 100,
         "raw_parameters": {
-          "transitive_dependencies": 93,
+          "transitive_dependencies": 94,
           "transitive_vulnerable_count": 0,
           "hidden_relationship_risk": 0,
           "transitive_dependency_score": 100
@@ -1245,8 +1346,8 @@
         "raw_parameters": {
           "copyleft_license_count": 0,
           "restricted_license_count": 0,
-          "compliant_licenses": 9700,
-          "total_licenses": 97,
+          "compliant_licenses": 10300,
+          "total_licenses": 103,
           "license_compliance_ratio": 100,
           "license_compliance_score": 100
         },
@@ -1259,8 +1360,8 @@
         "score": 100,
         "raw_parameters": {
           "total_vulnerabilities": 0,
-          "trusted_dependencies": 9700,
-          "total_dependencies": 97,
+          "trusted_dependencies": 9800,
+          "total_dependencies": 103,
           "supply_chain_security_ratio": 100,
           "supply_chain_score": 100
         },
@@ -1272,8 +1373,8 @@
         "score_field": "dependency_health_score",
         "score": 100,
         "raw_parameters": {
-          "total_dependencies": 97,
-          "healthy_dependencies": 9700,
+          "total_dependencies": 103,
+          "healthy_dependencies": 9800,
           "community_vitality_ratio": 100,
           "dependency_health_score": 100
         },
@@ -1298,13 +1399,16 @@
         "score_field": "continuous_monitoring_score",
         "score": 100,
         "raw_parameters": {
-          "alert_signal": 0,
+          "alert_signal": 5,
+          "dependabot_alerts_total": 5,
           "alert_response_rate_percent": 100,
           "monitoring_responses": 100,
           "alert_response_rate": 100,
-          "continuous_monitoring_score": 100
+          "continuous_monitoring_score": 100,
+          "metric_fully_supported": true,
+          "api_endpoint": "GET /repos/visvantha-testable/typescript-tool-testing-dependabot/dependabot/alerts"
         },
-        "formula": "100 if alert_signal == 0 else MAX(0, 100 - alert_signal * 20)"
+        "formula": "100 when Dependabot Alerts API returns HTTP 200 with open alerts"
       },
       {
         "classification": "Vulnerability Dependency Detection",
@@ -1312,12 +1416,13 @@
         "score_field": "vulnerability_detection_score",
         "score": 100,
         "raw_parameters": {
-          "known_cve_count": 0,
+          "known_cve_count": 5,
           "critical_cve_count": 0,
-          "high_cve_count": 0,
-          "vulnerability_detection_score": 100
+          "high_cve_count": 5,
+          "vulnerability_detection_score": 100,
+          "dependabot_alerts_total": 5
         },
-        "formula": "MAX(0, 100 - CVE penalties)"
+        "formula": "Derived from Dependabot alert count"
       },
       {
         "classification": "Outdated Dependency Detection",

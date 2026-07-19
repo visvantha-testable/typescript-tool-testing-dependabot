@@ -27,7 +27,7 @@ export function verifyDependabotJson(jsonPath: string): number {
     "supplemental_raw_data",
     "metrics",
     "dependabot_config",
-    "security_advisories",
+    "dependabot_alerts",
   ];
   for (const field of required) {
     if (!(field in data)) errors.push(`missing root field ${field}`);

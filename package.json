@@ -9,12 +9,20 @@
     "start": "node dist/src/index.js",
     "test": "vitest run",
     "trigger": "tsx src/dependabotTrigger.ts",
-    "verify": "tsx src/verify/verifyCli.ts --json dependabot.json"
+    "verify": "tsx src/verify/verifyCli.ts --json dependabot.json",
+    "verify:alerts": "tsx src/verify/verifyAlertsCli.ts"
   },
   "engines": {
     "node": ">=20"
   },
+  "dependencies": {
+    "axios": "0.21.1",
+    "lodash": "4.17.20",
+    "minimist": "1.2.5"
+  },
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@types/minimist": "^1.2.5",
     "@types/node": "^20.14.0",
     "tsx": "^4.19.0",
     "typescript": "^5.5.0",
