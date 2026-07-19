@@ -40,7 +40,11 @@ export async function runDependabotTrigger(
   const npmCheck = checkIntentionallyVulnerablePackages(ROOT);
   const fetchResult = await fetchDependabotAlerts(options.token);
 
-  const { rawPath, csvPath } = exportDependabotAlertOutputs(ROOT, fetchResult.alerts);
+  const { rawPath, csvPath } = exportDependabotAlertOutputs(
+    ROOT,
+    fetchResult.alerts,
+    fetchResult.raw_response,
+  );
   console.log(`Wrote ${rawPath}`);
   console.log(`Wrote ${csvPath}`);
 
@@ -60,7 +64,7 @@ export async function runDependabotTrigger(
   mkdirSync(ARTIFACTS_DIR, { recursive: true });
   writeFileSync(
     join(ARTIFACTS_DIR, "dependabot_alerts_raw.json"),
-    JSON.stringify(fetchResult.alerts, null, 2),
+    fetchResult.raw_response,
     "utf-8",
   );
 
@@ -75,8 +79,9 @@ export async function runDependabotTrigger(
   console.log(`  Supported: ${validation.supported}`);
   console.log(`  Directly Emitted: ${validation.directly_emitted}`);
   console.log(`  Derived: ${validation.derived}`);
-  console.log(`  Fully Supported: ${validation.fully_supported}`);
+  console.log(`  Real-Time Alerting: ${validation.real_time_alerting}`);
   console.log(`  Alert count: ${validation.alert_count}`);
+  console.log(`  Evidence: ${validation.evidence}`);
   console.log(`  Comments: ${validation.comments}`);
 
   if (!options.skipVerify) {
@@ -94,21 +99,19 @@ export async function runDependabotTrigger(
   const all100 =
     finalOutput.metrics_covered === 8 &&
     finalOutput.metrics.every((m) => m.score === 100 && m.covered === "yes");
-  const fullySupported =
-    finalOutput.continuous_monitoring_validation?.fully_supported === true;
 
   console.log(
     `\nTRIGGER COMPLETE: dependabot.json ready — ${finalOutput.metrics.length} metrics, all 100/100=${all100}`,
   );
-  console.log(`Real-Time Alerting fully supported=${fullySupported}`);
+  console.log(`Real-Time Alerting KPI=${validation.real_time_alerting}`);
 
-  if (!fullySupported) {
+  if (validation.real_time_alerting !== "PASS") {
     console.warn(
       "\nNOTE: Dependabot alerts not yet available. Push vulnerable deps and enable alerts on GitHub, then re-run trigger.",
     );
   }
 
-  return (all100 && fullySupported) ? 0 : all100 ? 0 : 1;
+  return validation.real_time_alerting === "PASS" && all100 ? 0 : 1;
 }
 
 async function main(): Promise<void> {

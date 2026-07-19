@@ -1,11 +1,11 @@
 {
   "dependabot_enabled": true,
   "monitoring_active": true,
-  "dependabot_alerts_total": 5,
-  "open_alerts_count": 5,
-  "alert_signal": 5,
+  "dependabot_alerts_total": 35,
+  "open_alerts_count": 35,
+  "alert_signal": 35,
   "alert_response_rate_percent": 100,
-  "new_alerts_count": 5,
+  "new_alerts_count": 35,
   "baseline_alert_count": 0,
   "continuous_monitoring_score": 100,
   "continuous_monitoring_percent": 100,
@@ -1197,7 +1197,7 @@
         "dependabot_native": false,
         "raw_parameters": {
           "total_vulnerabilities": 0,
-          "trusted_dependencies": 9800,
+          "trusted_dependencies": 6800,
           "total_dependencies": 103,
           "supply_chain_security_ratio": 100,
           "supply_chain_score": 100
@@ -1218,7 +1218,7 @@
         "dependabot_native": false,
         "raw_parameters": {
           "total_dependencies": 103,
-          "healthy_dependencies": 9800,
+          "healthy_dependencies": 6800,
           "community_vitality_ratio": 100,
           "dependency_health_score": 100
         },
@@ -1257,8 +1257,8 @@
         "raw_sources_present": true,
         "dependabot_native": true,
         "raw_parameters": {
-          "alert_signal": 5,
-          "dependabot_alerts_total": 5,
+          "alert_signal": 35,
+          "dependabot_alerts_total": 35,
           "alert_response_rate_percent": 100,
           "monitoring_responses": 100,
           "alert_response_rate": 100,
@@ -1281,11 +1281,11 @@
         "raw_sources_present": true,
         "dependabot_native": true,
         "raw_parameters": {
-          "known_cve_count": 5,
+          "known_cve_count": 35,
           "critical_cve_count": 0,
-          "high_cve_count": 5,
+          "high_cve_count": 35,
           "vulnerability_detection_score": 100,
-          "dependabot_alerts_total": 5
+          "dependabot_alerts_total": 35
         },
         "formula": "Derived from Dependabot alert count"
       },
@@ -1360,7 +1360,7 @@
         "score": 100,
         "raw_parameters": {
           "total_vulnerabilities": 0,
-          "trusted_dependencies": 9800,
+          "trusted_dependencies": 6800,
           "total_dependencies": 103,
           "supply_chain_security_ratio": 100,
           "supply_chain_score": 100
@@ -1374,7 +1374,7 @@
         "score": 100,
         "raw_parameters": {
           "total_dependencies": 103,
-          "healthy_dependencies": 9800,
+          "healthy_dependencies": 6800,
           "community_vitality_ratio": 100,
           "dependency_health_score": 100
         },
@@ -1399,8 +1399,8 @@
         "score_field": "continuous_monitoring_score",
         "score": 100,
         "raw_parameters": {
-          "alert_signal": 5,
-          "dependabot_alerts_total": 5,
+          "alert_signal": 35,
+          "dependabot_alerts_total": 35,
           "alert_response_rate_percent": 100,
           "monitoring_responses": 100,
           "alert_response_rate": 100,
@@ -1416,11 +1416,11 @@
         "score_field": "vulnerability_detection_score",
         "score": 100,
         "raw_parameters": {
-          "known_cve_count": 5,
+          "known_cve_count": 35,
           "critical_cve_count": 0,
-          "high_cve_count": 5,
+          "high_cve_count": 35,
           "vulnerability_detection_score": 100,
-          "dependabot_alerts_total": 5
+          "dependabot_alerts_total": 35
         },
         "formula": "Derived from Dependabot alert count"
       },

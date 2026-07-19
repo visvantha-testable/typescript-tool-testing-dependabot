@@ -5,18 +5,17 @@ import type { DependabotAlert } from "../types/dependabotTypes.js";
 const CSV_HEADERS = [
   "Alert ID",
   "Dependency Name",
-  "Package Ecosystem",
+  "Ecosystem",
+  "Manifest Path",
   "Severity",
   "CVE",
   "GHSA",
   "Vulnerable Version",
   "First Patched Version",
-  "Manifest Path",
   "Alert State",
+  "Advisory Summary",
   "Created Date",
   "Updated Date",
-  "Fixed Version",
-  "Advisory Summary",
 ] as const;
 
 function escapeCsv(value: string): string {
@@ -50,29 +49,21 @@ function extractFirstPatchedVersion(alert: DependabotAlert): string {
   );
 }
 
-function extractFixedVersion(alert: DependabotAlert): string {
-  if (alert.fixed_at) {
-    return extractFirstPatchedVersion(alert);
-  }
-  return "";
-}
-
 export function alertToCsvRow(alert: DependabotAlert): string[] {
   return [
     String(alert.number),
     alert.dependency?.package?.name ?? "",
     alert.dependency?.package?.ecosystem ?? "",
+    alert.dependency?.manifest_path ?? "",
     alert.security_vulnerability?.severity ?? alert.security_advisory?.severity ?? "",
     extractCve(alert),
     extractGhsa(alert),
     extractVulnerableVersion(alert),
     extractFirstPatchedVersion(alert),
-    alert.dependency?.manifest_path ?? "",
     alert.state ?? "",
+    alert.security_advisory?.summary ?? "",
     alert.created_at ?? "",
     alert.updated_at ?? "",
-    extractFixedVersion(alert),
-    alert.security_advisory?.summary ?? "",
   ];
 }
 
@@ -86,6 +77,7 @@ export function alertsToCsv(alerts: DependabotAlert[]): string {
 export function exportDependabotAlertOutputs(
   repoRoot: string,
   alerts: DependabotAlert[],
+  rawResponse: string,
 ): { rawPath: string; csvPath: string } {
   const outputsDir = join(repoRoot, "outputs");
   mkdirSync(outputsDir, { recursive: true });
@@ -93,7 +85,7 @@ export function exportDependabotAlertOutputs(
   const rawPath = join(outputsDir, "dependabot_alerts_raw.json");
   const csvPath = join(outputsDir, "dependabot_alerts.csv");
 
-  writeFileSync(rawPath, JSON.stringify(alerts, null, 2), "utf-8");
+  writeFileSync(rawPath, rawResponse, "utf-8");
   writeFileSync(csvPath, alertsToCsv(alerts), "utf-8");
 
   return { rawPath, csvPath };

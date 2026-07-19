@@ -18,9 +18,14 @@ export function verifyDependabotAlerts(): number {
   }
 
   if (existsSync(rawPath)) {
-    const alerts = JSON.parse(readFileSync(rawPath, "utf-8")) as unknown[];
-    if (!Array.isArray(alerts) || alerts.length === 0) {
-      errors.push("dependabot_alerts_raw.json is empty — GitHub has not generated alerts yet");
+    const raw = readFileSync(rawPath, "utf-8").trim();
+    if (!raw) {
+      errors.push("dependabot_alerts_raw.json is empty");
+    } else {
+      const alerts = JSON.parse(raw) as unknown[];
+      if (!Array.isArray(alerts) || alerts.length === 0) {
+        errors.push("dependabot_alerts_raw.json has no alerts — GitHub scan may be pending");
+      }
     }
   }
 
@@ -28,12 +33,29 @@ export function verifyDependabotAlerts(): number {
     const validation = JSON.parse(readFileSync(validationPath, "utf-8")) as {
       fully_supported?: boolean;
       api_http_status?: number;
+      supported?: string;
+      directly_emitted?: string;
+      derived?: string;
+      real_time_alerting?: string;
+      evidence?: string;
     };
     if (validation.api_http_status !== 200) {
       errors.push(`API status ${validation.api_http_status}, expected 200`);
     }
+    if (validation.supported !== "Yes") {
+      errors.push(`supported=${validation.supported}, expected Yes`);
+    }
+    if (validation.directly_emitted !== "No") {
+      errors.push(`directly_emitted=${validation.directly_emitted}, expected No`);
+    }
+    if (validation.derived !== "Yes") {
+      errors.push(`derived=${validation.derived}, expected Yes`);
+    }
+    if (validation.real_time_alerting !== "PASS") {
+      errors.push(`real_time_alerting=${validation.real_time_alerting}, expected PASS`);
+    }
     if (!validation.fully_supported) {
-      errors.push("Continuous Dependency Monitoring not fully supported (no real alerts)");
+      errors.push("Continuous Dependency Monitoring not fully supported");
     }
   }
 
@@ -43,7 +65,7 @@ export function verifyDependabotAlerts(): number {
     return 1;
   }
 
-  console.log("OK: Dependabot Alerts API returned real security alerts");
+  console.log("OK: Real-Time Alerting KPI PASS — live Dependabot alerts validated");
   return 0;
 }
 

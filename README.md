@@ -63,6 +63,16 @@ Repository: [typescript-tool-testing-dependabot](https://github.com/visvantha-te
 
 ## Metric Validation
 
-**Continuous Dependency Monitoring / Real-Time Alerting** is marked **Fully Supported** only when the Dependabot Alerts API returns HTTP 200 with at least one real security alert.
+| Field | Expected |
+|-------|----------|
+| Testing Type | Security White-box Testing |
+| Classification | Dependency Risk (SCA) |
+| Metric | Continuous Dependency Monitoring |
+| Capability | Real-Time Alerting |
+| Primary Tool | GitHub Dependabot Alerts API |
+| Supported | Yes |
+| Directly Emitted | No |
+| Derived | Yes |
+| Real-Time Alerting KPI | PASS |
 
 See `outputs/continuous_monitoring_validation.json` after trigger.

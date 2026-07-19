@@ -46,6 +46,7 @@ export async function fetchDependabotAlerts(
 async function fetchViaHttp(token: string): Promise<DependabotAlertsFetchResult> {
   const repo = getTrainingRepository();
   const alerts: DependabotAlert[] = [];
+  const rawPages: string[] = [];
   let url: string | null =
     `https://api.github.com/repos/${repo}/dependabot/alerts?state=open&per_page=100`;
   let httpStatus = 0;
@@ -59,14 +60,15 @@ async function fetchViaHttp(token: string): Promise<DependabotAlertsFetchResult>
       },
     });
     httpStatus = response.status;
+    const rawBody = await response.text();
     if (!response.ok) {
-      const body = await response.text();
       throw new Error(
-        `Dependabot Alerts API failed: ${response.status} ${response.statusText} — ${body}`,
+        `Dependabot Alerts API failed: ${response.status} ${response.statusText} — ${rawBody}`,
       );
     }
 
-    const page = (await response.json()) as DependabotAlert[];
+    rawPages.push(rawBody);
+    const page = JSON.parse(rawBody) as DependabotAlert[];
     alerts.push(...page);
     url = parseNextLink(response.headers.get("link"));
   }
@@ -78,6 +80,7 @@ async function fetchViaHttp(token: string): Promise<DependabotAlertsFetchResult>
     alerts,
     alert_count: alerts.length,
     fetched_at: new Date().toISOString(),
+    raw_response: mergeRawPages(rawPages),
   };
 }
 
@@ -96,7 +99,16 @@ function fetchViaGhCli(): DependabotAlertsFetchResult {
     alerts,
     alert_count: alerts.length,
     fetched_at: new Date().toISOString(),
+    raw_response: output.trim(),
   };
+}
+
+function mergeRawPages(rawPages: string[]): string {
+  if (rawPages.length === 1) {
+    return rawPages[0];
+  }
+  const merged = rawPages.flatMap((page) => JSON.parse(page) as DependabotAlert[]);
+  return JSON.stringify(merged);
 }
 
 function parseNextLink(linkHeader: string | null): string | null {

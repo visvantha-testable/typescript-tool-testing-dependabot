@@ -75,6 +75,7 @@ export interface DependabotAlertsFetchResult {
   alerts: DependabotAlert[];
   alert_count: number;
   fetched_at: string;
+  raw_response: string;
 }
 
 export interface NpmVulnerabilityCheck {
@@ -103,12 +104,14 @@ export interface ContinuousMonitoringValidation {
   testing_type: string;
   classification: string;
   metric: string;
-  kpi: string;
+  capability: string;
+  primary_tool: string;
   supported: string;
   directly_emitted: string;
   derived: string;
   evidence: string;
   comments: string;
+  real_time_alerting: "PASS" | "FAIL";
   fully_supported: boolean;
   dependabot_config_detected: boolean;
   dependency_graph_available: boolean;

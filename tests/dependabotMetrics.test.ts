@@ -46,6 +46,7 @@ function makeFetchResult(alertCount: number): DependabotAlertsFetchResult {
     alerts,
     alert_count: alertCount,
     fetched_at: "2026-01-01T00:00:00Z",
+    raw_response: JSON.stringify(alerts),
   };
 }
 
