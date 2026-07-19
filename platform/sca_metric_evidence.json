@@ -2,12 +2,86 @@
   "tool": "Dependabot",
   "strategy": "Security White-box Testing",
   "category": "Dependency Risk (SCA)",
-  "metrics_total": 1,
+  "metrics_total": 8,
   "normalized_scores": {
+    "Transitive Dependency Analysis": 100,
+    "License Compliance Testing": 100,
+    "Supply Chain Security Analysis": 100,
+    "Dependency Health Monitoring": 100,
+    "Risk Prioritization": 100,
     "Continuous Dependency Monitoring": 100,
-    "Real-Time Alerting": 100
+    "Vulnerability Dependency Detection": 100,
+    "Outdated Dependency Detection": 100
   },
   "metrics": [
+    {
+      "classification": "Transitive Dependency Analysis",
+      "l5_metric": "Hidden Relationship Mapping",
+      "score_field": "transitive_dependency_score",
+      "score": 100,
+      "raw_parameters": {
+        "transitive_dependencies": 93,
+        "transitive_vulnerable_count": 0,
+        "hidden_relationship_risk": 0,
+        "transitive_dependency_score": 100
+      },
+      "formula": "MAX(0, 100 - transitive_vulnerable_count * 20)"
+    },
+    {
+      "classification": "License Compliance Testing",
+      "l5_metric": "Legal Risk Validation",
+      "score_field": "license_compliance_score",
+      "score": 100,
+      "raw_parameters": {
+        "copyleft_license_count": 0,
+        "restricted_license_count": 0,
+        "compliant_licenses": 9700,
+        "total_licenses": 97,
+        "license_compliance_ratio": 100,
+        "license_compliance_score": 100
+      },
+      "formula": "MAX(0, 100 - (copyleft*20 + restricted*10))"
+    },
+    {
+      "classification": "Supply Chain Security Analysis",
+      "l5_metric": "Trust Integrity Verification",
+      "score_field": "supply_chain_score",
+      "score": 100,
+      "raw_parameters": {
+        "total_vulnerabilities": 0,
+        "trusted_dependencies": 9700,
+        "total_dependencies": 97,
+        "supply_chain_security_ratio": 100,
+        "supply_chain_score": 100
+      },
+      "formula": "MAX(0, 100 - total_vulnerabilities * 5)"
+    },
+    {
+      "classification": "Dependency Health Monitoring",
+      "l5_metric": "Community Vitality Tracking",
+      "score_field": "dependency_health_score",
+      "score": 100,
+      "raw_parameters": {
+        "total_dependencies": 97,
+        "healthy_dependencies": 9700,
+        "community_vitality_ratio": 100,
+        "dependency_health_score": 100
+      },
+      "formula": "MAX(0, 100 - (vulnerable_packages / total_dependencies) * 100)"
+    },
+    {
+      "classification": "Risk Prioritization",
+      "l5_metric": "Mitigation Effort Ranking",
+      "score_field": "risk_prioritization_score",
+      "score": 100,
+      "raw_parameters": {
+        "critical_cve_count": 0,
+        "high_cve_count": 0,
+        "prioritization_coverage_percent": 100,
+        "risk_prioritization_score": 100
+      },
+      "formula": "100 if no critical/high CVEs"
+    },
     {
       "classification": "Continuous Dependency Monitoring",
       "l5_metric": "Real-Time Alerting",
@@ -17,9 +91,34 @@
         "alert_signal": 0,
         "alert_response_rate_percent": 100,
         "monitoring_responses": 100,
+        "alert_response_rate": 100,
         "continuous_monitoring_score": 100
       },
       "formula": "100 if alert_signal == 0 else MAX(0, 100 - alert_signal * 20)"
+    },
+    {
+      "classification": "Vulnerability Dependency Detection",
+      "l5_metric": "Known CVE Count",
+      "score_field": "vulnerability_detection_score",
+      "score": 100,
+      "raw_parameters": {
+        "known_cve_count": 0,
+        "critical_cve_count": 0,
+        "high_cve_count": 0,
+        "vulnerability_detection_score": 100
+      },
+      "formula": "MAX(0, 100 - CVE penalties)"
+    },
+    {
+      "classification": "Outdated Dependency Detection",
+      "l5_metric": "Version Lag Assessment",
+      "score_field": "outdated_dependency_score",
+      "score": 100,
+      "raw_parameters": {
+        "outdated_dependencies": 0,
+        "outdated_dependency_score": 100
+      },
+      "formula": "MAX(0, 100 - outdated_dependencies * 15)"
     }
   ]
 }

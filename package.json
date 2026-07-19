@@ -1,10 +1,12 @@
 {
   "name": "typescript-tool-testing-dependabot",
   "version": "1.0.0",
-  "description": "Testable training repo: Dependabot Continuous Dependency Monitoring (100/100)",
+  "description": "Testable Dependabot training repo — 8/8 SCA metrics at 100/100",
   "type": "module",
+  "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc",
+    "start": "node dist/src/index.js",
     "test": "vitest run",
     "trigger": "tsx src/dependabotTrigger.ts",
     "verify": "tsx src/verify/verifyCli.ts --json dependabot.json"

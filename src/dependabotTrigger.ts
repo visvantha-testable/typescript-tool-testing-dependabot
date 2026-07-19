@@ -15,6 +15,7 @@ import type { AdvisoryBaseline } from "./types/dependabotTypes.js";
 import { verifyDependabotJson } from "./verify/verifyDependabotJson.js";
 import { exportPlatformBundle } from "./platform/exportPlatformBundle.js";
 import { extractGhsaIds } from "./clients/securityAdvisoriesClient.js";
+import { collectNpmArtifacts } from "./collect/npmArtifacts.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const BASELINE_PATH = join(ROOT, "config", "golden_baseline_advisories.json");
@@ -54,10 +55,11 @@ export async function runDependabotTrigger(
     "utf-8",
   );
 
+  const npm = collectNpmArtifacts(ROOT);
   const metrics = computeMetrics(advisories, refreshedBaseline, config);
   const output = buildOutput(advisories, refreshedBaseline, config, metrics);
 
-  exportPlatformBundle(ROOT, output as unknown as Record<string, unknown>, metrics, advisories);
+  exportPlatformBundle(ROOT, output as unknown as Record<string, unknown>, metrics, advisories, npm);
   console.log(`Wrote ${OUTPUT_PATH}`);
 
   if (!options.skipVerify) {
@@ -69,10 +71,13 @@ export async function runDependabotTrigger(
 
   const finalOutput = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8")) as {
     metrics: Array<{ score: number; covered: string }>;
+    metrics_covered?: number;
   };
-  const all100 = finalOutput.metrics.every((m) => m.score === 100 && m.covered === "yes");
+  const all100 =
+    finalOutput.metrics_covered === 8 &&
+    finalOutput.metrics.every((m) => m.score === 100 && m.covered === "yes");
   console.log(
-    `\nTRIGGER COMPLETE: dependabot.json ready — 1 metric, 100/100=${all100}`,
+    `\nTRIGGER COMPLETE: dependabot.json ready — ${finalOutput.metrics.length} metrics, all 100/100=${all100}`,
   );
   console.log(`API: ${getApiEndpoint()} on ${getTargetRepository()}`);
   return all100 ? 0 : 1;

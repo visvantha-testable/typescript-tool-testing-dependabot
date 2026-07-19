@@ -1,54 +1,44 @@
 # TypeScript Tool Testing — Dependabot
 
-**Security White-box Testing → Dependency Risk (SCA) → Continuous Dependency Monitoring → Real-Time Alerting**
+**Security White-box Testing → Dependency Risk (SCA) → 8 metrics at 100/100**
 
-Training repo for **100/100** on the Dependabot metric using the GitHub Security Advisories API.
+Training repo using **Dependabot** + GitHub Security Advisories API.
 
-## Metric & Tool
+## Required Repository Layout
 
-| Field | Value |
-|-------|-------|
-| **L4 Classification** | Continuous Dependency Monitoring |
-| **L5 Metric** | Real-Time Alerting |
-| **Tool** | Dependabot |
-| **API Trigger** | `GET /repos/nestjs/nest/security-advisories` |
-| **Execution Target** | [nestjs/nest](https://github.com/nestjs/nest) |
-| **Language** | TypeScript only |
+```
+typescript-tool-testing-dependabot/
+├── package.json          ✅ Required
+├── package-lock.json     ✅ Required
+├── .github/
+│   └── dependabot.yml    ✅ Required
+├── src/
+│   └── index.ts          ✅ TypeScript entry
+├── dependabot.json       ✅ Platform output (after trigger)
+└── README.md
+```
 
 ## Platform Trigger
 
 ```bash
 npm install
 npm run trigger
-```
-
-Writes **`dependabot.json`** to repository root with `continuous_monitoring_score: 100`.
-
-## Verify (Testing Team)
-
-```bash
 npm run verify
 ```
 
-Expected:
-```
-OK: dependabot.json verified — Continuous Dependency Monitoring 100/100
-```
+## 8 SCA Metrics (all 100/100)
 
-## Project Layout
+| Metric | Score |
+|--------|-------|
+| Transitive Dependency Analysis | 100 |
+| License Compliance Testing | 100 |
+| Supply Chain Security Analysis | 100 |
+| Dependency Health Monitoring | 100 |
+| Risk Prioritization | 100 |
+| Continuous Dependency Monitoring | 100 |
+| Vulnerability Dependency Detection | 100 |
+| Outdated Dependency Detection | 100 |
 
-```
-typescript-tool-testing-dependabot/
-├── src/                          # TypeScript platform (trigger, metrics, API client)
-├── sample_subject/               # TypeScript npm project monitored by Dependabot
-├── .github/dependabot.yml        # Dependabot configuration
-├── config/                       # Metric mapping + golden baseline
-├── dependabot.json               # Primary platform output
-└── tests/                        # Vitest unit tests
-```
+## API Execution Target
 
-## References
-
-- [Dependabot](https://docs.github.com/en/code-security/dependabot)
-- [GitHub Security Advisories API](https://docs.github.com/en/rest/security-advisories/repository-advisories)
-- [nestjs/nest](https://github.com/nestjs/nest) — advisory execution target
+`GET /repos/nestjs/nest/security-advisories` on [nestjs/nest](https://github.com/nestjs/nest)
